@@ -18,7 +18,7 @@ class AsyncClient(BaseClient):
         self.logger.debug('Req {}: GET to {}, params={}'.format(
             req_num, dest, json.dumps(params, indent=4)))
 
-        resp = await self.session.get(dest, params=params)
+        resp = await self.session.get(dest, params=params, verify = False)
         self._log_response(resp, req_num)
         register_redactions_from_response(resp)
         return resp
@@ -32,7 +32,7 @@ class AsyncClient(BaseClient):
         self.logger.debug('Req {}: POST to {}, json={}'.format(
             req_num, dest, json.dumps(data, indent=4)))
 
-        resp = await self.session.post(dest, json=data)
+        resp = await self.session.post(dest, json=data, verify = False)
         self._log_response(resp, req_num)
         register_redactions_from_response(resp)
         return resp
@@ -46,7 +46,7 @@ class AsyncClient(BaseClient):
         self.logger.debug('Req {}: PUT to {}, json={}'.format(
             req_num, dest, json.dumps(data, indent=4)))
 
-        resp = await self.session.put(dest, json=data)
+        resp = await self.session.put(dest, json=data, verify = False)
         self._log_response(resp, req_num)
         register_redactions_from_response(resp)
         return resp
@@ -60,7 +60,7 @@ class AsyncClient(BaseClient):
         self.logger.debug('Req {}: PATCH to {}, json={}'.format(
             req_num, dest, json.dumps(data, indent=4)))
 
-        resp = await self.session.patch(dest, json=data)
+        resp = await self.session.patch(dest, json=data, verify = False)
         self._log_response(resp, req_num)
         register_redactions_from_response(resp)
         return resp
@@ -73,7 +73,7 @@ class AsyncClient(BaseClient):
         req_num = self._req_num()
         self.logger.debug('Req {}: DELETE to {}'.format(req_num, dest))
 
-        resp = await self.session.delete(dest)
+        resp = await self.session.delete(dest, verify = False)
         self._log_response(resp, req_num)
         register_redactions_from_response(resp)
         return resp
